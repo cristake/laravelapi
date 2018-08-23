@@ -91,10 +91,16 @@ class RouteServiceProvider extends ServiceProvider
      * @return void
      */
     protected function mapAdminRoutes()
-        {
-            Route::domain('admin.laravelapi.test')
-                 ->middleware('web')
-                 ->namespace($this->namespace)
-                 ->group(base_path('routes/admin.php'));
-        }
+    {
+        // Route::prefix('admin')
+        //      ->middleware('admin')
+        //      ->namespace($this->namespace)
+        //      ->group(base_path('routes/admin.php'));
+
+        Route::domain('admin.laravelapi.test')
+             // ->middleware('admin')
+             ->middleware('web')
+             ->namespace($this->namespace)
+             ->group(base_path('routes/admin.php'));
+    }
 }
