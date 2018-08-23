@@ -57,7 +57,7 @@ class RouteServiceProvider extends ServiceProvider
         //      ->namespace($this->namespace)
         //      ->group(base_path('routes/web.php'));
 
-        Route::domain('laravelapi.test')
+        Route::domain($this->baseDomain())
             ->middleware('web')
             ->namespace($this->namespace)
             ->group(base_path('routes/web.php'));
@@ -77,7 +77,7 @@ class RouteServiceProvider extends ServiceProvider
         //      ->namespace($this->namespace)
         //      ->group(base_path('routes/api.php'));
 
-        Route::domain('api.laravelapi.test')
+        Route::domain($this->baseDomain('api'))
             ->middleware('api')
             ->namespace($this->namespace)
             ->group(base_path('routes/api.php'));
@@ -97,10 +97,19 @@ class RouteServiceProvider extends ServiceProvider
         //      ->namespace($this->namespace)
         //      ->group(base_path('routes/admin.php'));
 
-        Route::domain('admin.laravelapi.test')
+        Route::domain($this->baseDomain('admin'))
              // ->middleware('admin')
              ->middleware('web')
              ->namespace($this->namespace)
              ->group(base_path('routes/admin.php'));
+    }
+
+    private function baseDomain(string $subdomain = ''): string
+    {
+        if (strlen($subdomain) > 0) {
+            $subdomain = "{$subdomain}.";
+        }
+
+        return $subdomain . config('app.base_domain');
     }
 }

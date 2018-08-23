@@ -1,5 +1,3 @@
 <?php
 
-    Route::get('/', function () {
-        return ['hello'];
-    });
+Route::apiResource('/posts', 'PostController');
